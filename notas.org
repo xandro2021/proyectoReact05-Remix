@@ -1,0 +1,39 @@
+#+title: Notas
+
+* Consumir API en Remix
+** Convencional con Fetch
++ La manera convencional usando fetch tal y como se muestra en el ejemplo
++ Sin embargo se puede notar que el output de consola aparece solamente en la terminal del lado del servidor y no en la consola del navegador. Esto Se debe a que por default Remix ha ejecutado el codigo de consumo desde el Servidor en vez del Cliente
+#+begin_src js
+export async function loader() {
+
+  const respuesta = await fetch(`${process.env.API_URL}/guitarras?populate=imagen`);
+  const resultado = await respuesta.json();
+
+  console.log(resultado);
+  console.log(process.env.API_URL);
+
+  return {};
+}
+#+end_src
+** Creacion de la carpeta Modelo
++ Se puede crear una carpeta con el nombre de models dentro de app.
++ Dentro de dicho Folder para este ejemplo se crea el archivo guitarras.server.js
++ Al nombrarle .server le estamos especificando a Remix que se ejecute desde el lado del servidor
+#+begin_src js
+export async function getGuitarras() {
+  const respuesta = await fetch(`${process.env.API_URL}/guitarras?populate=imagen`);
+  return await respuesta.json();
+}
+#+end_src
++ Then you import the function in the main component (tienda.jsx)
+#+begin_src js
+import { getGuitarras } from '~/models/guitarras.server';
+
+export async function loader() {
+
+  const guitarras = await getGuitarras();
+  console.log(guitarras);
+  return {};
+}
+#+end_src
