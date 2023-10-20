@@ -5,6 +5,10 @@ import styles from '~/styles/guitarras.css';
 // Una vez el loader este disponible, la funcion meta tiene la info en data
 export function meta({ data }) {
 
+  return [
+    { title: `GuitarLA - ${data.data[0].attributes.nombre}` },
+    { description: `Guitarras, venta de guitarras, guitarra ${data.data[0].attributes.nombre}` }
+  ];
 }
 
 export function links() {
@@ -18,9 +22,7 @@ export function links() {
 
 export async function loader({ params }) {
   const { guitarraUrl } = params;
-
   const guitarra = await getGuitarra(guitarraUrl);
-
   return guitarra;
 }
 
