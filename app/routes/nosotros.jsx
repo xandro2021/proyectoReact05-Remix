@@ -3,10 +3,10 @@ import styles from '~/styles/nosotros.css';
 
 export function meta() {
   return (
-    [
-      { title: 'GuitarLA - Nosotros' },
-      { description: 'Venta de guitarras, blog de musica' }
-    ]
+    {
+      title: 'GuitarLA - Nosotros',
+      description: 'Venta de guitarras, blog de musica'
+    }
   )
 }
 
