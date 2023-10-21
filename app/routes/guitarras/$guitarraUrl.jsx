@@ -21,20 +21,16 @@ export async function loader({ params }) {
 // Una vez el loader este disponible, la funcion meta tiene la info en data
 export function meta({ data }) {
   if (!data) {
-    return (
-      {
-        title: 'Guitarra no encontrada',
-        description: 'Guitarras, venta de guitarras, guitarra no encontrada'
-      }
-    );
+    return {
+      title: 'GuitarraLA - Guitarra no encontrada',
+      description: 'Guitarras, venta de guitarras, guitarra no encontrada'
+    }
   }
 
-  return (
-    {
-      title: `GuitarLA - ${data.data[0].attributes.nombre}`,
-      description: `Guitarras, venta de guitarras, guitarra ${data.data[0].attributes.nombre}`
-    }
-  );
+  return {
+    title: `GuitarraLA - ${data?.data[0]?.attributes.nombre}`,
+    description: `Guitarras, venta de guitarras, guitarra ${data?.data[0]?.attributes.nombre}`
+  }
 }
 
 export function links() {

@@ -17,7 +17,8 @@
 }
 
 .post {
-
+    max-width: 80rem;
+    margin: 0px auto;
 }
 
 .post .contenido {
@@ -40,4 +41,13 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
     overflow: hidden;
+}
+
+.post .texto {
+    white-space: pre-wrap;
+    /* margin-top: -5rem; */
+}
+
+.mt-3 {
+    margin-top: 3rem;
 }
