@@ -17,7 +17,7 @@ function Post({ post }) {
 
         <Link
           className="enlace"
-          to={`/posts/${url}`}
+          to={`/blog/${url}`}
         >Leer Post</Link>
 
       </div>
