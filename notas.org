@@ -37,3 +37,8 @@ export async function loader() {
   return {};
 }
 #+end_src
+** Error Hidratacion debido a Discrepancia provocada por localStorage usado para el carrito
++ Debido al condicional usado en root.jsx para inicializar el valor de carritoLS es que se ha provocado una discrepancia entre los que se ha generado en el server side rendering con lo que se tiene del lado del cliente. Para solucionarlo se instala el paquete npm remix-utils
+#+begin_src bash
+npm i remix-utils
+#+end_src

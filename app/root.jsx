@@ -50,12 +50,21 @@ export function links() {
 
 export default function App() {
   // Si existe window significa que estamos en el cliente por lo que podemos usar el local storage, de lo contrario no haga nada (null)
-  const carritoLS = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('carrito')) ?? [] : null;
-  const [carrito, setCarrito] = useState(carritoLS);
+  // const carritoLS = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('carrito')) ?? [] : null;
+  // const [carrito, setCarrito] = useState(carritoLS);
+  const [carrito, setCarrito] = useState([]);
 
   useEffect(() => {
+    // Verifico que carrito tenga algo antes de guardarlo en el storage para evitar borrar todo al recargar la pagina en el primer renderizado
+    if (carrito?.length === 0) return;
     localStorage.setItem('carrito', JSON.stringify(carrito));
   }, [carrito]);
+
+  useEffect(() => {
+    const carritoLS = JSON.parse(localStorage.getItem('carrito')) ?? [];
+    setCarrito(carritoLS);
+  }, []);
+
 
 
   const agregarCarrito = guitarra => {
@@ -92,6 +101,8 @@ export default function App() {
 
   const eliminarGuitarra = id => {
     const carritoActualizado = carrito.filter(guitarraState => guitarraState.id !== id);
+    // Debido a la verificacion del useState del carrito que no guarda cuando no hay elementos, entonces se debe hacer manualmente aqui
+    carritoActualizado.length === 0 && localStorage.setItem('carrito', '[]');
     setCarrito(carritoActualizado);
   };
 
