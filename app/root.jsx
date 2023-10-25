@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Meta,
   Links,
@@ -49,7 +49,14 @@ export function links() {
 }
 
 export default function App() {
-  const [carrito, setCarrito] = useState([]);
+  // Si existe window significa que estamos en el cliente por lo que podemos usar el local storage, de lo contrario no haga nada (null)
+  const carritoLS = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('carrito')) ?? [] : null;
+  const [carrito, setCarrito] = useState(carritoLS);
+
+  useEffect(() => {
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+  }, [carrito]);
+
 
   const agregarCarrito = guitarra => {
     if (carrito.some(guitarraState => guitarraState.id === guitarra.id)) {
